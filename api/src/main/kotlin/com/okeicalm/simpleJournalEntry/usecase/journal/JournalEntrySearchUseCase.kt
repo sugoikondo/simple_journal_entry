@@ -1,13 +1,14 @@
 package com.okeicalm.simpleJournalEntry.fetcher
 
 import com.okeicalm.simpleJournalEntry.entity.JournalEntry
+import com.okeicalm.simpleJournalEntry.entity.JournalId
 import com.okeicalm.simpleJournalEntry.repository.JournalEntryRepository
 import com.okeicalm.simpleJournalEntry.repository.JournalEntrySearchParams
 import org.springframework.stereotype.Component
 
-data class JournalEntrySearchUseCaseParams(val journalID: Long?, val journalIDs: List<Long>?) : JournalEntrySearchParams {
-    override val journalId: Long? = null
-    override val journalIds: List<Long>? = null
+data class JournalEntrySearchUseCaseParams(val journalID: JournalId?, val journalIDs: List<JournalId>?) : JournalEntrySearchParams {
+    override val journalId: JournalId? = null
+    override val journalIds: List<JournalId>? = null
 }
 
 @Component

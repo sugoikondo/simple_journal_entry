@@ -1,15 +1,15 @@
 package com.okeicalm.simpleJournalEntry.repository
 
-import com.okeicalm.simpleJournalEntry.entity.Account
+import com.okeicalm.simpleJournalEntry.entity.*
 
 interface AccountRepository {
     fun findAll(): List<Account>
 
-    fun findById(id: Long): Account?
+    fun findById(id: AccountId): Account?
 
-    fun create(account: Account): Long
+    fun create(account: Account): AccountId
 
-    fun update(id: Long, account: Account): Long
+    fun update(id: AccountId, account: Account): AccountId
 
-    fun delete(id: Long): Long
+    fun delete(id: AccountId): AccountId
 }

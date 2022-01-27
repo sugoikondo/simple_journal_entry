@@ -2,6 +2,7 @@ package com.okeicalm.simpleJournalEntry.handler.mutation
 
 import com.expediagroup.graphql.generator.scalars.ID
 import com.expediagroup.graphql.server.operations.Mutation
+import com.okeicalm.simpleJournalEntry.entity.AccountId
 import com.okeicalm.simpleJournalEntry.handler.type.JournalEntryType
 import com.okeicalm.simpleJournalEntry.handler.type.JournalType
 import com.okeicalm.simpleJournalEntry.usecase.journal.JournalCreateUseCase
@@ -19,7 +20,7 @@ class CreateJournalMutation(private val journalCreateUseCase: JournalCreateUseCa
         val journalEntryInputDatum = input.createJournalEntryInput.map {
             JournalEntryInputData(
                 side = it.side.toByte(),
-                accountID = it.accountID.toString().toLong(),
+                accountID = AccountId(it.accountID.toString().toLong()),
                 value = it.value
             )
         }

@@ -1,7 +1,9 @@
 package com.okeicalm.simpleJournalEntry.usecase.journal
 
+import com.okeicalm.simpleJournalEntry.entity.AccountId
 import com.okeicalm.simpleJournalEntry.entity.Journal
 import com.okeicalm.simpleJournalEntry.entity.JournalEntry
+import com.okeicalm.simpleJournalEntry.entity.JournalId
 import com.okeicalm.simpleJournalEntry.repository.JournalEntryRepository
 import com.okeicalm.simpleJournalEntry.repository.JournalEntrySearchParams
 import com.okeicalm.simpleJournalEntry.repository.JournalRepository
@@ -9,11 +11,11 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDate
 
-data class JournalEntryInputData(val side: Byte, val accountID: Long, val value: Int)
+data class JournalEntryInputData(val side: Byte, val accountID: AccountId, val value: Int)
 data class JournalCreateUseCaseInput(val incurredOn: LocalDate, val journalEntryInputDatum: List<JournalEntryInputData>)
 data class JournalCreateUseCaseOutput(val journal: Journal, val journalEntries: List<JournalEntry>)
 
-data class SearchParams(override val journalId: Long, override val journalIds: List<Long>?) : JournalEntrySearchParams
+data class SearchParams(override val journalId: JournalId, override val journalIds: List<JournalId>?) : JournalEntrySearchParams
 
 interface JournalCreateUseCase {
     fun call(input: JournalCreateUseCaseInput): JournalCreateUseCaseOutput

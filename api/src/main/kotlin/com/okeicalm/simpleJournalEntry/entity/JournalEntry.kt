@@ -13,16 +13,16 @@ import com.okeicalm.simpleJournalEntry.tables.pojos.JournalEntries
  */
 data class JournalEntry(
     val id: JournalEntryId = JournalEntryId(0),
-    val journalId: Long,
+    val journalId: JournalId,
     val side: Byte,
-    val accountId: Long,
+    val accountId: AccountId,
     val value: Int,
 ) {
     constructor(journalEntry: JournalEntries) : this(
         JournalEntryId(journalEntry.id),
-        journalEntry.journalId,
+        JournalId(journalEntry.journalId),
         journalEntry.side,
-        journalEntry.accountId,
+        AccountId(journalEntry.accountId),
         journalEntry.value,
     )
 }

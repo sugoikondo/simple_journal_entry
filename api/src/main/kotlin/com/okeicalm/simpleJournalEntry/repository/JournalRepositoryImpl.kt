@@ -1,6 +1,6 @@
 package com.okeicalm.simpleJournalEntry.repository
 
-import com.okeicalm.simpleJournalEntry.entity.Journal
+import com.okeicalm.simpleJournalEntry.entity.*
 import com.okeicalm.simpleJournalEntry.tables.JournalEntries.JOURNAL_ENTRIES
 import com.okeicalm.simpleJournalEntry.tables.Journals.JOURNALS
 import com.okeicalm.simpleJournalEntry.tables.pojos.Journals
@@ -20,19 +20,19 @@ class JournalRepositoryImpl(private val dslContext: DSLContext) : JournalReposit
         return result.map { Journal(it, null) }
     }
 
-    override fun findById(id: Long): Journal? {
+    override fun findById(id: JournalId): Journal? {
         val journal = dslContext
-            .fetchOne(JOURNALS, JOURNALS.ID.eq(id))
+            .fetchOne(JOURNALS, JOURNALS.ID.eq(id.value))
             ?.into(Journals::class.java)
 
         return journal?.let { Journal(it, emptyList()) }
     }
 
-    override fun create(journal: Journal): Long {
+    override fun create(journal: Journal): JournalId {
         dslContext
             .newRecord(JOURNALS)
             .setIncurredOn(journal.incurredOn)
             .store()
-        return dslContext.lastID().toLong()
+        return JournalId(dslContext.lastID().toLong())
     }
 }
