@@ -11,7 +11,7 @@ data class DeleteUserOutput(val id: ID)
 
 @Component
 class DeleteUserMutation(private val userRepository: UserRepository): Mutation {
-    fun delete(input: DeleteUserInput) : DeleteUserOutput {
+    fun deleteUser(input: DeleteUserInput) : DeleteUserOutput {
         val deletedId = userRepository.delete(UserId(input.id.toString().toLong()))
         return DeleteUserOutput(ID(deletedId.value.toString())) // ここ、deletedId.toString() でもコンパイル通るの最高に危ないなぁ。テストで保証できれば良いかもだけど・
     }
